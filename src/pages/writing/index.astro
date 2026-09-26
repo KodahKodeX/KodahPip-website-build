@@ -4,6 +4,7 @@ import { site } from '../../site.config';
 
 const essays = Object.values(import.meta.glob('./*.md', { eager: true }) as Record<string, any>)
   .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .filter((e) => !e.unlisted)
   .sort((a, b) => +new Date(b.date) - +new Date(a.date));
 ---
 
@@ -23,7 +24,8 @@ const essays = Object.values(import.meta.glob('./*.md', { eager: true }) as Reco
                 {new Date(e.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}
               </span>
               <span class="t">{e.title}</span>
-              <span class="s">{e.summary}</span>
+              <span class="s">{e.summary}{e.source === 'Substack' && <em class="src"> · Substack</em>}</span>
+              {e.cover ? <img class="thumb" src={e.cover} alt="" loading="lazy" /> : <span class="thumb blank"></span>}
             </a>
           </li>
         ))}
@@ -51,7 +53,7 @@ const essays = Object.values(import.meta.glob('./*.md', { eager: true }) as Reco
   }
   .list a {
     display: grid;
-    grid-template-columns: 140px 1fr 1fr;
+    grid-template-columns: 110px 1.1fr 1fr 150px;
     gap: 32px;
     padding: 36px 0;
     border-bottom: 1px solid var(--line);
@@ -75,10 +77,30 @@ const essays = Object.values(import.meta.glob('./*.md', { eager: true }) as Reco
   .list a:hover .t {
     color: var(--gold);
   }
+  .thumb {
+    width: 150px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    align-self: center;
+    filter: saturate(0.85);
+  }
+  .thumb.blank {
+    background: url('/img/chevron-sm.webp') center / auto 324px;
+    opacity: 0.6;
+  }
+  .src {
+    font-style: normal;
+    color: var(--gold);
+  }
   @media (max-width: 760px) {
     .list a {
       grid-template-columns: 1fr;
       gap: 10px;
+    }
+    .thumb {
+      width: 100%;
+      order: -1;
     }
   }
 </style>

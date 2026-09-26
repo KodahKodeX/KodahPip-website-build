@@ -6,17 +6,17 @@ export const site = {
   title: 'Kodah Pipitone — Tune Everything',
   description:
     'Kodah Pipitone is a convener, speaker and experience designer at the frontier of technology and the self. Tune the self. Tune relationships. Tune contribution.',
-  email: 'kodahpip@gmail.com',
+  email: 'Kodah@kyberkollective.com',
 
   // Paste your Calendly link here. Leave empty to hide the "Book a call" button.
-  calendly: 'https://calendly.com/kodah',
+  calendly: 'https://calendly.com/kodah/discover',
 
   // Create a free form at formspree.io, then paste its ID here (the part after /f/).
   // Until then, the contact form falls back to opening an email.
   formspreeId: '',
 
   // Newsletter signup page (Substack or Beehiiv). Leave empty to hide the signup.
-  newsletterUrl: '',
+  newsletterUrl: 'https://kodahpip.substack.com/subscribe',
 
   activ8Url: 'https://www.activ8.com',
 

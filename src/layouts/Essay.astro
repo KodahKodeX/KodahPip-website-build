@@ -15,10 +15,14 @@ const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
     <div class="wrap narrow">
       <p class="eyebrow">Kodah KodeX · {date}</p>
       <h1>{frontmatter.title}</h1>
-      {frontmatter.summary && <p class="lede">{frontmatter.summary}</p>}
+      {frontmatter.summary && (!frontmatter.source || frontmatter.source === 'Substack') && <p class="lede">{frontmatter.summary}</p>}
       <hr class="rule" />
       <div class="body"><slot /></div>
       <hr class="rule" />
+      {frontmatter.source === 'Substack' && (
+        <p class="origin">First published on <a class="link" href={frontmatter.sourceUrl} rel="noopener">Substack</a>.</p>
+      )}
+      {frontmatter.source === 'kodahpip.com' && <p class="origin">First published on the original kodahpip.com blog.</p>}
       <p class="after">
         <a class="link" href="/writing/">More writing</a>
         {site.newsletterUrl && (
@@ -65,5 +69,35 @@ const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
   }
   .after {
     color: var(--sand);
+  }
+  .origin {
+    color: var(--sand-dim);
+    font-size: 14px;
+  }
+  .body :global(img) {
+    width: 100%;
+    height: auto;
+    margin: 1.6em 0;
+    border: 1px solid var(--line);
+  }
+  .body :global(p:has(> img:only-child)) {
+    margin: 0;
+  }
+  .body :global(.beat) {
+    text-align: center;
+    color: var(--gold);
+    letter-spacing: 0.6em;
+    margin: 0.4em 0 1.1em;
+  }
+  .body :global(a) {
+    color: var(--gold);
+    word-break: break-word;
+  }
+  .body :global(ul),
+  .body :global(ol) {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.9vw, 23px);
+    line-height: 1.6;
+    padding-left: 1.2em;
   }
 </style>

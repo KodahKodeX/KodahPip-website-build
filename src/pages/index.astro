@@ -8,6 +8,7 @@ import { site } from '../site.config';
 
 const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true }) as Record<string, any>)
   .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .filter((e) => !e.unlisted)
   .sort((a, b) => +new Date(b.date) - +new Date(a.date))
   .slice(0, 3);
 ---
