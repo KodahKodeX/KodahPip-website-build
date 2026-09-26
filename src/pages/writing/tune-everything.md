@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Essay.astro
 title: Tune Everything
-date: 2026-10-09
+date: 2026-09-26
 summary: Everything is an instrument. The work is to bring the whole ensemble into coherence.
 ---
 
