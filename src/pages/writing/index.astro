@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../site.config';
+
+const essays = Object.values(import.meta.glob('./*.md', { eager: true }) as Record<string, any>)
+  .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .sort((a, b) => +new Date(b.date) - +new Date(a.date));
+---
+
+<Base title="Writing" description="Kodah KodeX: essays from the frontier of technology, culture and the human self.">
+  <div class="page">
+    <div class="wrap">
+      <p class="eyebrow">Kodah KodeX</p>
+      <h1>Notes from the <em class="gold">frontier.</em></h1>
+      <p class="lede">Essays on technology, culture and the human self.</p>
+      {site.newsletterUrl && <a class="btn" href={site.newsletterUrl} rel="noopener">Get new essays by email</a>}
+
+      <ul class="list">
+        {essays.map((e) => (
+          <li>
+            <a href={e.url}>
+              <span class="date">
+                {new Date(e.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })}
+              </span>
+              <span class="t">{e.title}</span>
+              <span class="s">{e.summary}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    padding: 180px 0 140px;
+  }
+  h1 {
+    font-size: clamp(52px, 8.5vw, 116px);
+    margin-bottom: 28px;
+  }
+  .btn {
+    margin-top: 32px;
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 96px 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .list a {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    gap: 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    align-items: baseline;
+  }
+  .date {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .t {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.1;
+  }
+  .s {
+    color: var(--sand);
+  }
+  .list a:hover .t {
+    color: var(--gold);
+  }
+  @media (max-width: 760px) {
+    .list a {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>

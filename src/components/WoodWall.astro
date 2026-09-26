@@ -1,0 +1,74 @@
+---
+// The chevron walnut wall: an original marquetry pattern generated for this site.
+// spine  = where the chevrons meet, as a % of the width (e.g. "70%")
+// shade  = how much to darken it (0 = full colour, 1 = black)
+// flow   = how fast the chevrons drift as you scroll (0 = still)
+interface Props {
+  spine?: string;
+  shade?: number;
+  flow?: number;
+  class?: string;
+}
+const { spine = '50%', shade = 0.5, flow = 0.25, class: cls = '' } = Astro.props;
+---
+
+<div class={`wood-wall ${cls}`} style={`--spine:${spine};--shade:${shade}`} data-flow={flow} aria-hidden="true">
+  <div class="grain"></div>
+</div>
+
+<style>
+  .wood-wall {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background-color: #2a1f18;
+    background-image: url('/img/chevron.webp');
+    background-size: 2400px auto;
+    background-repeat: repeat;
+    background-position: calc(var(--spine) - 1200px) var(--flow-y, 0px);
+  }
+  @media (max-width: 760px) {
+    .wood-wall {
+      background-image: url('/img/chevron-sm.webp');
+      background-size: 1200px auto;
+      background-position: calc(var(--spine) - 600px) var(--flow-y, 0px);
+    }
+  }
+  /* darken evenly, then let the owner component add its own gradients */
+  .wood-wall::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 12, 8, var(--shade));
+  }
+  .grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    box-shadow: inset 0 0 160px 40px rgba(12, 8, 5, 0.75);
+  }
+</style>
+
+<script>
+  const walls = [...document.querySelectorAll<HTMLElement>('.wood-wall')];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (walls.length && !reduce) {
+    let ticking = false;
+    const update = () => {
+      for (const w of walls) {
+        const speed = Number(w.dataset.flow || 0);
+        const top = w.getBoundingClientRect().top;
+        // chevrons drift toward their point as the wall passes through the view
+        w.style.setProperty('--flow-y', `${(-top * speed).toFixed(1)}px`);
+      }
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }, { passive: true });
+    update();
+  }
+</script>

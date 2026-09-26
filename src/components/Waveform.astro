@@ -1,0 +1,97 @@
+---
+// Five strings, out of tune, that settle into one resonant line.
+// The site's signature motif: dissonance resolving into coherence.
+interface Props {
+  class?: string;
+  strings?: number;
+  settle?: boolean;
+}
+const { class: cls = '', strings = 5, settle = true } = Astro.props;
+const ids = Array.from({ length: strings }, (_, i) => i);
+---
+
+<svg
+  class={`waveform ${cls}`}
+  viewBox="0 0 1200 240"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  data-settle={settle ? 'true' : 'false'}
+>
+  {ids.map((i) => (
+    <path
+      class="string"
+      data-i={i}
+      d="M0 120 L1200 120"
+      style={`opacity:${i === Math.floor(strings / 2) ? 0.95 : 0.35}`}
+    />
+  ))}
+</svg>
+
+<style>
+  .waveform {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  .string {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+</style>
+
+<script>
+  const W = 1200;
+  const H = 240;
+  const MID = H / 2;
+  const STEPS = 120;
+
+  function draw(svg: SVGSVGElement, t: number, detune: number) {
+    const paths = svg.querySelectorAll<SVGPathElement>('.string');
+    const n = paths.length;
+    paths.forEach((p, i) => {
+      const k = i - (n - 1) / 2; // -2..2
+      const freq = 2.2 + k * 0.55 * detune;
+      const phase = k * 1.3 * detune + t * 0.6;
+      const amp = 34 + Math.abs(k) * 10 * detune;
+      let d = '';
+      for (let s = 0; s <= STEPS; s++) {
+        const x = (s / STEPS) * W;
+        const u = s / STEPS;
+        // taper the ends so each string looks anchored, like an instrument
+        const envelope = Math.sin(Math.PI * u);
+        const y =
+          MID +
+          envelope *
+            (amp * Math.sin(u * Math.PI * 2 * freq + phase) +
+              detune * 12 * Math.sin(u * Math.PI * 9 + t * 1.7 + k));
+        d += (s === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+      }
+      p.setAttribute('d', d);
+    });
+  }
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<SVGSVGElement>('svg.waveform').forEach((svg) => {
+    const settle = svg.dataset.settle === 'true';
+    if (reduce) {
+      draw(svg, 0, 0);
+      return;
+    }
+    const start = performance.now();
+    let visible = true;
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(svg);
+
+    function frame(now: number) {
+      const t = (now - start) / 1000;
+      // detuned at first, then settles into coherence over ~4s; stays slightly alive
+      const detune = settle ? Math.max(0, 1 - t / 4) ** 2 + 0.04 : 0.6;
+      if (visible) draw(svg, t, detune);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  });
+</script>

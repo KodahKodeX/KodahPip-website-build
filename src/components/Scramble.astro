@@ -1,0 +1,43 @@
+---
+// Text that resolves out of noise, letter by letter: signal emerging from static.
+// Usage: <Scramble text="Tune" delay={200} />
+interface Props {
+  text: string;
+  delay?: number;
+  class?: string;
+}
+const { text, delay = 0, class: cls = '' } = Astro.props;
+---
+
+<span class={`scramble ${cls}`} data-scramble={text} data-delay={delay} aria-label={text}><span aria-hidden="true">{text}</span></span>
+
+<script>
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-scramble]').forEach((el) => {
+    const text = el.dataset.scramble || '';
+    const delay = Number(el.dataset.delay || 0);
+    const out = el.firstElementChild as HTMLElement;
+    if (reduce) return;
+    out.style.visibility = 'hidden';
+    setTimeout(() => {
+      out.style.visibility = '';
+      let pos = 0;
+      const id = setInterval(() => {
+        pos += 0.4;
+        let s = '';
+        for (let i = 0; i < text.length; i++) {
+          if (text[i] === ' ' || i < pos) s += text[i];
+          else if (i < pos + 3) s += CHARS[Math.floor(Math.random() * CHARS.length)];
+          else s += ' ';
+        }
+        out.textContent = s;
+        if (pos >= text.length) {
+          out.textContent = text;
+          clearInterval(id);
+        }
+      }, 30);
+    }, delay);
+  });
+</script>

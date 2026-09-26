@@ -1,0 +1,610 @@
+---
+import Base from '../layouts/Base.astro';
+import WoodWall from '../components/WoodWall.astro';
+import ScrollStage from '../components/ScrollStage.astro';
+import Scramble from '../components/Scramble.astro';
+import Contact from '../components/Contact.astro';
+import { site } from '../site.config';
+
+const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true }) as Record<string, any>)
+  .map((m) => ({ ...m.frontmatter, url: m.url }))
+  .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+  .slice(0, 3);
+---
+
+<Base>
+  <!-- HERO -->
+  <div class="hero" data-hero>
+    <WoodWall spine="var(--hero-spine)" shade={0.5} flow={0.18} />
+    <div class="hero-shade"></div>
+    <figure class="frame" data-depth="-8">
+      <picture>
+        <source media="(max-width: 760px)" srcset="/img/kodah-hero-photo-sm.webp" />
+        <img src="/img/kodah-hero-photo.webp" alt="Kodah Pipitone at a walnut table in front of a chevron wood wall" width="1024" height="1536" fetchpriority="high" />
+      </picture>
+    </figure>
+    <div class="wrap hero-inner" data-depth="5">
+      <p class="eyebrow">Convener · Speaker · Experience designer</p>
+      <h1><Scramble text="Tune" delay={400} /><br /><em class="gold"><Scramble text="Everything." delay={800} /></em></h1>
+      <p class="lede">
+        Beings, relationships, organizations, cities. Everything is an instrument. I help leaders bring theirs into coherence.
+      </p>
+      <div class="actions">
+        <a class="btn" href="#contact">Book Kodah</a>
+        <a class="btn quiet" href="#thesis">The thesis</a>
+      </div>
+    </div>
+    <p class="scroll-cue" aria-hidden="true">Scroll</p>
+  </div>
+
+  <!-- THESIS: words come and go over the wall as you scroll -->
+  <ScrollStage
+    id="thesis"
+    eyebrow="The thesis"
+    lines={[
+      { text: 'Everything is', accent: 'an instrument.', sub: 'A being. A team. A family. A company. A city. Each can drift out of tune. Each can be brought back.' },
+      { text: 'Tune', accent: 'the self.', sub: 'Coherence starts in the being. Lose contact with it, and every signal you send and receive gets distorted.' },
+      { text: 'Tune', accent: 'relationships.', sub: 'Families and teams are ensembles. Each voice stays distinct. The goal is resonance, not sameness.' },
+      { text: 'Tune', accent: 'contribution.', sub: 'In tune, you find the rooms, the work and the places your gifts were made for.' },
+      { text: 'Tune', accent: 'everything.' },
+    ]}
+  />
+
+  <section class="origin-section">
+    <div class="wrap">
+      <div class="origin reveal">
+        <p class="eyebrow">Why this work</p>
+        <p>
+          I learned this the hard way. Building HostHome and then Suyana Technologies, I kept meeting people in the wrong rooms: the
+          wrong community, the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals
+          that sort a life got scrambled too.
+        </p>
+        <p>Tuning is how I found my way back. It is also how I help leaders, teams and cultures find theirs.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="inlay"></div>
+
+  <!-- DOORS -->
+  <section id="convenings" class="doors-section">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">The work</p>
+        <h2>I open rooms.</h2>
+        <p class="lede">
+          I speak to leaders about what technology is doing to us, and what we can do with it. Then I design the gatherings where
+          that conversation changes something.
+        </p>
+      </div>
+      <div class="doors">
+        <a class="door reveal" href="/speaking/">
+          <p class="eyebrow">01 · Keynotes</p>
+          <h3>Opening addresses and keynotes</h3>
+          <p>On technology, the self and coherence. For conferences, summits and leadership gatherings that want to leave changed.</p>
+          <span class="go">Speaking topics <i>→</i></span>
+        </a>
+        <a class="door reveal featured" href="#contact">
+          <p class="eyebrow">02 · Convenings</p>
+          <h3>Gatherings and company experiences</h3>
+          <p>
+            Leadership offsites, culture moments and curated rooms with guest voices from the frontiers of flow and human
+            performance. I design the arc and open the space. ACTIV8 and SJP produce it, so the vision survives contact with the
+            venue.
+          </p>
+          <p class="offer"><strong>Start with Ignition:</strong> a half-day leadership experience, designed and opened by Kodah.</p>
+          <span class="go">Plan a gathering <i>→</i></span>
+        </a>
+        <div class="door reveal quiet-door">
+          <p class="eyebrow">03 · Place</p>
+          <h3>Resilient, design-led places</h3>
+          <p>Homes and gathering places for founders and cultural conveners, built for the conditions ahead. By introduction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE TALK -->
+  <section class="talk">
+    <div class="wrap talk-grid">
+      <div class="reveal">
+        <p class="eyebrow">Signature keynote</p>
+        <h2>Technology<br />you can <em class="gold">feel.</em></h2>
+      </div>
+      <div class="reveal">
+        <p class="big">
+          Intelligence is leaving the screen. It is moving into our clothes, our homes, our vehicles and our bodies.
+        </p>
+        <p>
+          I have lived that shift from the inside. Frontier medicine rewrote my body and my sense of self, and I came back with a
+          clear view of what innovation does to people. This talk gives leaders a way to build technology people can feel, and
+          live with.
+        </p>
+        <ol class="takeaways">
+          <li>Where computing goes after the screen</li>
+          <li>What frontier technology does to identity, and the ethical lines that matter</li>
+          <li>How to design products, places and experiences that bring people into coherence</li>
+        </ol>
+        <a class="link" href="/speaking/">All topics and formats</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Built on real production</p>
+        <h2>Ideas made <em class="gold">inhabitable.</em></h2>
+        <p class="lede">
+          I'm a partner in <a class="link" href={site.activ8Url} rel="noopener">ACTIV8</a>, a creative experience agency powered by
+          SJP: twelve years of live production across Los Angeles and Las Vegas.
+        </p>
+      </div>
+      <ul class="credits reveal">
+        <li><span>Pop Up Book</span><em>Immersive theatrical installation</em></li>
+        <li><span>“Oh, the Places You’ll Go!”</span><em>Touring walkthrough experience</em></li>
+        <li><span>Interblock</span><em>Showroom and G2E experience</em></li>
+        <li><span>IPME</span><em>Outdoor video wall booth</em></li>
+        <li><span>Google Ads at CES</span><em>Production, through NVE</em></li>
+      </ul>
+      <p class="fine reveal">Selected work by the ACTIV8 and SJP teams and their production partners.</p>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <div class="inlay"></div>
+  <section class="statement">
+    <WoodWall spine="50%" shade={0.62} flow={0.3} />
+    <div class="wrap">
+      <p class="reveal">The challenge is not strategy.<br />The challenge is <em class="gold">coherence.</em></p>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  {essays.length > 0 && (
+    <section class="writing">
+      <div class="wrap">
+        <div class="head reveal row">
+          <div>
+            <p class="eyebrow">Writing</p>
+            <h2>Notes from the frontier</h2>
+          </div>
+          {site.newsletterUrl && <a class="btn quiet" href={site.newsletterUrl} rel="noopener">Subscribe</a>}
+        </div>
+        <div class="essays">
+          {essays.map((e) => (
+            <a class="essay reveal" href={e.url}>
+              <p class="eyebrow">{new Date(e.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })}</p>
+              <h3>{e.title}</h3>
+              <p>{e.summary}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Contact />
+</Base>
+
+<style>
+  .hero {
+    --hero-spine: 70%;
+    position: relative;
+    height: 100svh;
+    min-height: 660px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  /* darken behind the words, and let the bottom settle into the page */
+  .hero-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to right, rgba(18, 12, 8, 0.9) 0%, rgba(18, 12, 8, 0.7) 38%, rgba(18, 12, 8, 0.2) 62%, rgba(18, 12, 8, 0.1) 100%),
+      radial-gradient(ellipse 40% 55% at var(--hero-spine) 45%, transparent 0%, rgba(18, 12, 8, 0.25) 100%);
+  }
+  /* the portrait, hung on the wall like a framed piece */
+  .frame {
+    position: absolute;
+    z-index: 2;
+    margin: 0;
+    top: 104px;
+    bottom: 64px;
+    right: max(var(--gutter), calc((100vw - var(--max)) / 2 + 8px));
+    aspect-ratio: 1024 / 1536;
+    border: 1px solid rgba(207, 155, 92, 0.5);
+    padding: 8px;
+    background: rgba(18, 12, 8, 0.55);
+    box-shadow: 0 40px 80px rgba(8, 5, 3, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+    will-change: transform;
+  }
+  .frame picture,
+  .frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .frame::after {
+    content: '';
+    position: absolute;
+    left: -24px;
+    right: -24px;
+    bottom: -22px;
+    height: 10px;
+    background: url('/img/chevron-sm.webp') center / auto 324px repeat;
+    box-shadow: 0 6px 18px rgba(8, 5, 3, 0.6);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 4;
+    will-change: transform;
+    margin-top: -6vh;
+  }
+  .hero h1 {
+    margin-bottom: 32px;
+    font-size: clamp(64px, 10vw, 150px);
+    text-shadow: 0 2px 40px rgba(18, 12, 8, 0.9);
+  }
+  .hero .lede {
+    color: var(--bone);
+    opacity: 0.86;
+    text-shadow: 0 1px 20px rgba(18, 12, 8, 0.95);
+  }
+  .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .actions .btn {
+    background: rgba(18, 12, 8, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  .scroll-cue {
+    position: absolute;
+    z-index: 5;
+    bottom: 26px;
+    left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+  .scroll-cue::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 26px;
+    margin: 10px auto 0;
+    background: linear-gradient(var(--gold), transparent);
+    animation: cue 2.2s ease-in-out infinite;
+  }
+  @keyframes cue {
+    0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  }
+  @media (max-width: 760px) {
+    .hero {
+      --hero-spine: 50%;
+      height: auto;
+      min-height: 0;
+      display: block;
+      padding: 76px 0 72px;
+    }
+    .hero-shade {
+      background: linear-gradient(to bottom, rgba(18, 12, 8, 0.35) 0%, rgba(18, 12, 8, 0.6) 45%, rgba(18, 12, 8, 0.9) 70%, var(--obsidian) 100%);
+    }
+    .frame {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      margin: 0 var(--gutter) 48px;
+      height: 52svh;
+      aspect-ratio: auto;
+      padding: 6px;
+    }
+    .frame img {
+      object-position: 50% 12%;
+    }
+    .frame::after {
+      left: -8px;
+      right: -8px;
+      bottom: -16px;
+      height: 8px;
+    }
+    .hero-inner {
+      margin-top: 0;
+    }
+    .hero h1 {
+      font-size: clamp(56px, 17vw, 84px);
+      margin-bottom: 18px;
+    }
+    .actions {
+      margin-top: 26px;
+    }
+    .scroll-cue {
+      display: none;
+    }
+  }
+
+  .origin-section {
+    border-top: 0;
+  }
+  .head {
+    margin-bottom: clamp(48px, 7vw, 88px);
+  }
+  .head .lede {
+    margin-top: 28px;
+  }
+  .head.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  .panels article {
+    padding: 40px 36px 40px 0;
+    border-right: 1px solid var(--line);
+  }
+  .panels article + article {
+    padding-left: 36px;
+  }
+  .panels article:last-child {
+    border-right: 0;
+  }
+  .num {
+    font-family: var(--serif);
+    color: var(--gold);
+    font-size: 22px;
+  }
+  .panels h3 {
+    margin: 18px 0 16px;
+  }
+  .panels p {
+    color: var(--sand);
+    margin: 0;
+  }
+  .origin {
+    margin-top: clamp(64px, 8vw, 110px);
+    max-width: 760px;
+    margin-left: auto;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.3vw, 28px);
+    line-height: 1.45;
+  }
+  .origin p {
+    margin: 0 0 20px;
+  }
+  .origin p + p {
+    color: var(--sand);
+  }
+
+  .doors {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1fr;
+    gap: 20px;
+  }
+  .door {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 32px;
+    background: var(--graphite);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  a.door:hover {
+    border-color: var(--gold);
+  }
+  .door::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: url('/img/chevron-sm.webp') center / auto 324px repeat;
+    opacity: 0.85;
+  }
+  .door h3 {
+    margin-bottom: 18px;
+  }
+  .door p:not(.eyebrow) {
+    color: var(--sand);
+    margin: 0 0 16px;
+  }
+  .door .offer {
+    color: var(--bone) !important;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  .door.featured {
+    background: var(--graphite-2);
+  }
+  .go {
+    margin-top: auto;
+    padding-top: 12px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .go i {
+    font-style: normal;
+    color: var(--gold);
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+  a.door:hover .go i {
+    transform: translateX(6px);
+  }
+  .quiet-door {
+    background: transparent;
+  }
+
+  .talk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 7vw, 110px);
+  }
+  .talk .big {
+    font-family: var(--serif);
+    font-size: clamp(26px, 2.8vw, 34px);
+    line-height: 1.3;
+    margin-top: 0;
+  }
+  .talk p {
+    color: var(--sand);
+  }
+  .talk .big {
+    color: var(--bone);
+  }
+  .takeaways {
+    list-style: none;
+    counter-reset: t;
+    padding: 0;
+    margin: 36px 0 40px;
+    border-top: 1px solid var(--line);
+  }
+  .takeaways li {
+    counter-increment: t;
+    padding: 18px 0 18px 48px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .takeaways li::before {
+    content: '0' counter(t);
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    top: 21px;
+  }
+
+  .credits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .credits li {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .credits span {
+    font-family: var(--serif);
+    font-size: clamp(24px, 2.6vw, 32px);
+  }
+  .credits em {
+    font-style: normal;
+    color: var(--sand);
+    align-self: center;
+  }
+  .fine {
+    font-size: 13px;
+    color: var(--sand-dim);
+    margin-top: 24px;
+  }
+
+  .statement {
+    position: relative;
+    overflow: hidden;
+    border-top: 0;
+  }
+  .statement .wrap {
+    position: relative;
+    z-index: 2;
+  }
+  .statement p {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6.4vw, 84px);
+    line-height: 1.1;
+    margin: 0;
+    text-align: center;
+  }
+
+  .essays {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .essay {
+    text-decoration: none;
+    padding: 32px 0;
+    border-top: 1px solid var(--gold);
+  }
+  .essay h3 {
+    margin-bottom: 14px;
+  }
+  .essay p:not(.eyebrow) {
+    color: var(--sand);
+    margin: 0;
+  }
+  .essay:hover h3 {
+    color: var(--gold);
+  }
+
+  @media (max-width: 900px) {
+    .panels,
+    .doors,
+    .talk-grid,
+    .essays {
+      grid-template-columns: 1fr;
+    }
+    .panels article,
+    .panels article + article {
+      padding: 32px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .origin {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  // Depth: the portrait and the words drift in opposite directions as the mouse moves.
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hero && canHover && !reduce) {
+    const layers = [...hero.querySelectorAll<HTMLElement>('[data-depth]')];
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    window.addEventListener('mousemove', (e) => {
+      mx = (e.clientX / window.innerWidth) * 2 - 1;
+      my = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+    const tick = () => {
+      cx += (mx - cx) * 0.06;
+      cy += (my - cy) * 0.06;
+      for (const l of layers) {
+        const d = Number(l.dataset.depth);
+        l.style.transform = `translate3d(${(cx * d).toFixed(2)}px, ${(cy * d * 0.6).toFixed(2)}px, 0)`;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+</script>

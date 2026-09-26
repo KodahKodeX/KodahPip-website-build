@@ -1,0 +1,155 @@
+---
+// A tall section that pins to the screen while words come and go over the wall.
+// Each line fades in from blur, holds, then drifts out as the next arrives.
+import WoodWall from './WoodWall.astro';
+
+interface Line {
+  text: string;
+  accent?: string; // part of the line shown in brass italics
+  sub?: string;
+}
+interface Props {
+  lines: Line[];
+  id?: string;
+  eyebrow?: string;
+}
+const { lines, id, eyebrow } = Astro.props;
+---
+
+<section class="stage" id={id} style={`--n:${lines.length}`} data-stage>
+  <div class="pin">
+    <WoodWall spine="50%" shade={0.42} flow={0.35} />
+    <div class="veil"></div>
+    {eyebrow && <p class="eyebrow stage-eyebrow">{eyebrow}</p>}
+    <div class="words">
+      {lines.map((l, i) => (
+        <div class="line" data-i={i}>
+          <p class="big">
+            {l.text}
+            {l.accent && <> <em class="gold">{l.accent}</em></>}
+          </p>
+          {l.sub && <p class="sub">{l.sub}</p>}
+        </div>
+      ))}
+    </div>
+    <div class="ticks" aria-hidden="true">
+      {lines.map(() => <span></span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stage {
+    position: relative;
+    height: calc(var(--n) * 90vh + 60vh);
+    padding: 0;
+    border-top: 0;
+  }
+  .pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% 50%, rgba(18, 12, 8, 0.82) 0%, rgba(18, 12, 8, 0.35) 70%, transparent 100%),
+      linear-gradient(to bottom, var(--obsidian) 0%, transparent 18%, transparent 82%, var(--obsidian) 100%);
+  }
+  .stage-eyebrow {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+  }
+  .words {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 var(--gutter);
+    display: grid;
+  }
+  .line {
+    grid-area: 1 / 1;
+    text-align: center;
+    opacity: 0;
+    will-change: opacity, transform, filter;
+  }
+  .big {
+    font-family: var(--serif);
+    font-size: clamp(46px, 8vw, 118px);
+    line-height: 1.02;
+    margin: 0;
+    text-shadow: 0 4px 40px rgba(12, 8, 5, 0.9);
+  }
+  .sub {
+    margin: 28px auto 0;
+    max-width: 34ch;
+    font-size: clamp(16px, 1.6vw, 20px);
+    color: var(--bone);
+    opacity: 0.85;
+    text-shadow: 0 2px 16px rgba(12, 8, 5, 0.95);
+  }
+  .ticks {
+    position: absolute;
+    z-index: 2;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  .ticks span {
+    width: 28px;
+    height: 2px;
+    background: rgba(239, 231, 218, 0.22);
+    transition: background 0.4s;
+  }
+  .ticks span.on {
+    background: var(--gold);
+  }
+</style>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-stage]').forEach((stage) => {
+    const lines = [...stage.querySelectorAll<HTMLElement>('.line')];
+    const ticks = [...stage.querySelectorAll<HTMLElement>('.ticks span')];
+    const n = lines.length;
+    const render = () => {
+      const r = stage.getBoundingClientRect();
+      const total = r.height - window.innerHeight;
+      const p = Math.min(1, Math.max(0, -r.top / total)); // 0..1 through the stage
+      const pos = p * n - 0.5; // which line is centred
+      lines.forEach((el, i) => {
+        const d = pos - i; // <0 coming, 0 centred, >0 leaving
+        // hold each line fully sharp near its centre, then ease it away
+        const e = Math.max(0, Math.abs(d) - 0.22) / 0.78;
+        const sd = Math.sign(d) * e;
+        const a = reduce ? (Math.round(Math.max(0, Math.min(n - 1, pos))) === i ? 1 : 0) : Math.max(0, 1 - e * 2.2);
+        // the last line stays once it arrives
+        const stay = i === n - 1 && d > 0;
+        el.style.opacity = String(stay ? 1 : a);
+        if (!reduce) {
+          const dd = stay ? 0 : sd;
+          el.style.transform = `translateY(${(-dd * 60).toFixed(1)}px) scale(${(1 - Math.abs(dd) * 0.04).toFixed(3)})`;
+          el.style.filter = `blur(${Math.min(12, Math.abs(dd) * 14).toFixed(1)}px)`;
+        }
+      });
+      const active = Math.max(0, Math.min(n - 1, Math.round(pos)));
+      ticks.forEach((t, i) => t.classList.toggle('on', i <= active));
+    };
+    window.addEventListener('scroll', () => requestAnimationFrame(render), { passive: true });
+    window.addEventListener('resize', render);
+    render();
+  });
+</script>

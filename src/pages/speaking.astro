@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+import Waveform from '../components/Waveform.astro';
+import Contact from '../components/Contact.astro';
+
+const topics = [
+  {
+    title: 'Technology You Can Feel',
+    tag: 'Signature keynote',
+    body: 'Intelligence is leaving the screen for our clothes, homes, vehicles and bodies. Drawing on a life reshaped by frontier medicine, Kodah maps where computing goes next, what it does to identity, and how to build technology people can live with.',
+    for: 'Tech conferences, product and design leaders, innovation summits',
+  },
+  {
+    title: 'Tune Everything',
+    tag: 'Keynote',
+    body: 'Everything is an instrument: the self, the team, the family, the company, the city. A practical model for tuning all three: self, relationships, contribution. And for hearing dissonance before it becomes a crisis.',
+    for: 'Leadership gatherings, founder communities, human-performance events',
+  },
+  {
+    title: 'The Challenge Is Coherence',
+    tag: 'Keynote or working session',
+    body: 'Most organizations do not fail for lack of strategy. They fail because their people, systems and story stop playing together. How leaders restore coherence through growth, change and transition.',
+    for: 'Executive offsites, organizations in transformation',
+  },
+];
+
+const formats = [
+  ['Opening address', 'Sets the tone and the question for the whole gathering.'],
+  ['Keynote', '30–60 minutes, tailored to the audience and the moment.'],
+  ['Fireside or panel', 'A conversation with a host, founder or fellow speaker.'],
+  ['Curated session', 'Talk plus a designed experience, produced with ACTIV8.'],
+];
+---
+
+<Base title="Speaking" description="Kodah Pipitone speaks on technology, the self and coherence. Topics: Technology You Can Feel, Tune Everything, The Challenge Is Coherence.">
+  <div class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Speaking</p>
+      <h1>Talks that <em class="gold">tune</em> the room.</h1>
+      <p class="lede">
+        Kodah speaks at the frontier of technology and the self: what innovation is doing to people, and how leaders can build
+        what comes next with coherence.
+      </p>
+      <a class="btn" href="#contact">Check availability</a>
+    </div>
+    <div class="wave"><Waveform strings={3} /></div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow reveal">Topics</p>
+      <div class="topics">
+        {topics.map((t, i) => (
+          <article class="topic reveal">
+            <div class="meta">
+              <span class="n">0{i + 1}</span>
+              <span class="tag">{t.tag}</span>
+            </div>
+            <div>
+              <h2>{t.title}</h2>
+              <p>{t.body}</p>
+              <p class="for"><span>For</span> {t.for}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="formats-section">
+    <div class="wrap">
+      <p class="eyebrow reveal">Formats</p>
+      <div class="formats">
+        {formats.map(([f, d]) => (
+          <div class="reveal">
+            <h3>{f}</h3>
+            <p>{d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="note reveal">
+        Every talk starts with a call with the organizer to understand the audience and what should change for them. Kodah can
+        open and close a gathering, and ACTIV8 can design the experience around it.
+      </p>
+    </div>
+  </section>
+
+  <Contact />
+</Base>
+
+<style>
+  .page-hero {
+    padding: 180px 0 0;
+    overflow: hidden;
+  }
+  .page-hero h1 {
+    font-size: clamp(52px, 8.5vw, 116px);
+    margin-bottom: 32px;
+  }
+  .page-hero .btn {
+    margin-top: 40px;
+  }
+  .wave {
+    height: 160px;
+    margin-top: 80px;
+  }
+  .topics {
+    border-top: 1px solid var(--line);
+  }
+  .topic {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .n {
+    font-family: var(--serif);
+    color: var(--gold);
+    font-size: 26px;
+  }
+  .tag {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+  .topic h2 {
+    font-size: clamp(36px, 4.4vw, 56px);
+    margin-bottom: 20px;
+  }
+  .topic p {
+    color: var(--sand);
+    max-width: 62ch;
+  }
+  .for span {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+  .formats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+  .formats div {
+    border-top: 1px solid var(--gold);
+    padding-top: 24px;
+  }
+  .formats h3 {
+    margin-bottom: 12px;
+  }
+  .formats p {
+    color: var(--sand);
+    margin: 0;
+  }
+  .note {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.2vw, 27px);
+    line-height: 1.45;
+    max-width: 820px;
+  }
+  @media (max-width: 900px) {
+    .topic {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .meta {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .formats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .formats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

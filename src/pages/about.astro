@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+
+// When you have a real portrait, put it in /public (e.g. /public/kodah.jpg) and set the path here.
+const portrait = '/img/kodah-portrait.webp';
+---
+
+<Base title="About" description="Kodah Pipitone is a convener, speaker and experience designer who has lived at the frontier of technology and the self.">
+  <div class="page-hero">
+    <div class="wrap grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1>I've lived at the frontier <em class="gold">I talk about.</em></h1>
+      </div>
+      {portrait && <img class="portrait" src={portrait} alt="Kodah Pipitone" />}
+    </div>
+  </div>
+
+  <section class="story">
+    <div class="wrap narrow">
+      <p class="first reveal">
+        Kodah Pipitone is a convener, speaker and experience designer. A cultural anthropologist and rational futurist, he works
+        where frontier technology meets the human self.
+      </p>
+
+      <div class="reveal">
+        <p>
+          For more than five years I lived as a woman. Medicine and surgery reshaped my body, my relationships and how the world
+          met me. I transitioned and loved it. I detransitioned and loved that too. Both belong to the same life.
+        </p>
+        <p>
+          What I carry from it isn't a political position. It's first-hand knowledge of what frontier technology can do to a human
+          being, and a practice for bringing a self back into tune.
+        </p>
+      </div>
+
+      <blockquote class="reveal">Tune the body and the life before modifying them.</blockquote>
+
+      <div class="reveal">
+        <p>
+          That practice was built over a decade of ceremony, including Sundance, alongside dance, breathwork, contact improvisation
+          and men's work. It taught me that embodiment is a sophisticated capacity, not a soft skill.
+        </p>
+        <p>
+          As a founder, from HostHome to Suyana Technologies, I kept seeing the same pattern. People lose coherence with their
+          bodies, the signals that sort a life get distorted, and they end up in the wrong communities, the wrong work and the
+          wrong homes.
+        </p>
+        <p>
+          Today I open rooms. I'm a partner in ACTIV8, a creative experience agency powered by twelve years of SJP production. I
+          give keynotes and opening addresses, design leadership gatherings, and write about the frontier under the name Kodah
+          KodeX.
+        </p>
+      </div>
+
+      <ul class="values reveal" aria-label="Values">
+        <li>Sovereignty</li>
+        <li>Embodiment</li>
+        <li>Coherence</li>
+        <li>Agency</li>
+        <li>Trust</li>
+      </ul>
+    </div>
+  </section>
+
+  <Contact />
+</Base>
+
+<style>
+  .page-hero {
+    padding: 180px 0 40px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .page-hero h1 {
+    font-size: clamp(48px, 7.5vw, 104px);
+  }
+  .portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: grayscale(0.2) contrast(1.05);
+  }
+  .narrow {
+    max-width: 780px;
+  }
+  .story p {
+    color: var(--sand);
+    font-size: 19px;
+    margin: 0 0 24px;
+  }
+  .story .first {
+    font-family: var(--serif);
+    font-size: clamp(26px, 2.8vw, 34px);
+    line-height: 1.35;
+    color: var(--bone);
+    margin-bottom: 48px;
+  }
+  blockquote {
+    margin: 56px 0;
+    padding: 8px 0 8px 32px;
+    border-left: 1px solid var(--gold);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height: 1.2;
+    color: var(--bone);
+  }
+  .values {
+    list-style: none;
+    padding: 0;
+    margin: 64px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .values li {
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

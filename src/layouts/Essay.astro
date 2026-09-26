@@ -1,0 +1,69 @@
+---
+import Base from './Base.astro';
+import { site } from '../site.config';
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<Base title={frontmatter.title} description={frontmatter.summary}>
+  <article class="essay">
+    <div class="wrap narrow">
+      <p class="eyebrow">Kodah KodeX · {date}</p>
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.summary && <p class="lede">{frontmatter.summary}</p>}
+      <hr class="rule" />
+      <div class="body"><slot /></div>
+      <hr class="rule" />
+      <p class="after">
+        <a class="link" href="/writing/">More writing</a>
+        {site.newsletterUrl && (
+          <>
+            {' · '}
+            <a class="link" href={site.newsletterUrl} rel="noopener">Get new essays by email</a>
+          </>
+        )}
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .essay {
+    padding: 180px 0 120px;
+  }
+  .narrow {
+    max-width: 760px;
+  }
+  h1 {
+    font-size: clamp(48px, 7vw, 92px);
+    margin-bottom: 28px;
+  }
+  .body :global(p) {
+    font-family: var(--serif);
+    font-size: clamp(21px, 2vw, 24px);
+    line-height: 1.6;
+    color: var(--bone);
+    margin: 0 0 1.1em;
+  }
+  .body :global(h2) {
+    font-size: clamp(30px, 3.4vw, 42px);
+    margin: 1.6em 0 0.6em;
+  }
+  .body :global(blockquote) {
+    margin: 1.4em 0;
+    padding-left: 28px;
+    border-left: 1px solid var(--gold);
+  }
+  .body :global(blockquote p) {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .after {
+    color: var(--sand);
+  }
+</style>
