@@ -5,7 +5,7 @@ export const site = {
   name: 'Kodah Pipitone',
   title: 'Kodah Pipitone — Tune Everything',
   description:
-    'Kodah Pipitone is a convener, speaker and experience designer at the frontier of technology and the self. Tune the self. Tune relationships. Tune contribution.',
+    'Kodah Pipitone is a coach, strategist, and speaker at the frontier of technology and the self. Tune the self. Tune relationships. Tune contribution.',
   email: 'Kodah@kyberkollective.com',
 
   // Paste your Calendly link here. Leave empty to hide the "Book a call" button.
