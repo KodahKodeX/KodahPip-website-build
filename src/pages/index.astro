@@ -56,12 +56,29 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       <div class="origin reveal">
         <p class="eyebrow">Why this work</p>
         <p>
-          I learned this the hard way. Building HostHome and then Suyana Technologies, I kept meeting people in the wrong rooms: the
-          wrong community, the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals
-          that sort a life got scrambled too.
+          I learned this as a founder. HostHome, Suyana Technologies, Permanence Capital, Urth Capital, CampUS Holdings Group, and
+          now KyberKapital and the Resilience Fund. Building them, I kept meeting people in the wrong rooms: the wrong community,
+          the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals that sort a life
+          got scrambled too.
         </p>
         <p>Tuning is how I found my way back. It is also how I help leaders, teams and cultures find theirs.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- TEAMS SERVED -->
+  <section class="served">
+    <div class="wrap served-grid">
+      <div class="reveal">
+        <p class="eyebrow">Teams I've served</p>
+        <h2>A decade in <em class="gold">the room.</em></h2>
+        <p class="served-note">
+          The title changed with every engagement. What I brought did not: my being, and the gifts that come with it.
+        </p>
+      </div>
+      <ul class="served-list reveal" aria-label="Past clients and collaborators">
+        {site.served.map((name) => <li>{name}</li>)}
+      </ul>
     </div>
   </section>
 
@@ -395,6 +412,33 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     color: var(--sand);
   }
 
+  .served-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+  .served-note {
+    color: var(--sand);
+    margin-top: 24px;
+    max-width: 420px;
+  }
+  .served-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .served-list li {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.2vw, 28px);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
   .doors {
     display: grid;
     grid-template-columns: 1fr 1.25fr 1fr;
@@ -568,6 +612,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
 
   @media (max-width: 900px) {
     .panels,
+    .served-grid,
     .doors,
     .talk-grid,
     .essays {
@@ -581,6 +626,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
     .origin {
       margin-left: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .served-list {
+      grid-template-columns: 1fr;
     }
   }
 </style>

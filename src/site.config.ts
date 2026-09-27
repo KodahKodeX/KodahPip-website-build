@@ -18,7 +18,17 @@ export const site = {
   // Newsletter signup page (Substack or Beehiiv). Leave empty to hide the signup.
   newsletterUrl: 'https://kodahpip.substack.com/subscribe',
 
-  activ8Url: 'https://www.activ8.com',
+  activ8Url: 'https://www.sjp.vegas/',
+  // Teams I've served (homepage). Add, remove or reorder names here.
+  served: [
+    'Summit Series',
+    'Flow Genome Project',
+    'COVID Alliance',
+    'Cobalt Tech Ventures',
+    'EcoMap Technologies',
+    'BreathPen',
+    'Circles of Voices',
+  ],
 
   social: {
     linkedin: 'https://www.linkedin.com/in/kodahpipitone/',
