@@ -158,8 +158,21 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
           I'm a partner in <a class="link" href={site.activ8Url} rel="noopener">ACTIV8</a>, a creative experience agency powered by
           SJP: twelve years of live production across Los Angeles and Las Vegas.
         </p>
+        <div class="services">
+          <div>
+            <p class="eyebrow">Through ACTIV8</p>
+            <h3>Burning Man camp design and production</h3>
+            <p>Concept, infrastructure and build for large theme camps: commercial power, kitchens and common spaces, delivered on the playa.</p>
+          </div>
+          <div>
+            <p class="eyebrow">Through ACTIV8</p>
+            <h3>Immersive brand and product launches</h3>
+            <p>Live experiences wrapped in digital marketing and UGC content pipelines, so the moment keeps working after the doors close.</p>
+          </div>
+        </div>
       </div>
       <ul class="credits reveal">
+        <li><span>Camp UBU, Burning Man</span><em>65-person camp with full commercial power, kitchen and common-area infrastructure</em></li>
         <li><span>Interblock</span><em>Showroom and G2E experience</em></li>
         <li><span>IPME</span><em>Outdoor video wall booth</em></li>
         <li><span>Google Ads at CES</span><em>Production, through NVE</em></li>
@@ -543,6 +556,24 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     top: 21px;
   }
 
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .services > div {
+    padding: 32px 30px;
+    background: var(--graphite);
+    border: 1px solid var(--line);
+  }
+  .services h3 {
+    margin: 14px 0 12px;
+  }
+  .services p:last-child {
+    color: var(--sand);
+    margin: 0;
+  }
   .credits {
     list-style: none;
     padding: 0;
@@ -628,6 +659,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   @media (max-width: 900px) {
     .panels,
     .served-grid,
+    .services,
     .doors,
     .talk-grid,
     .essays {
