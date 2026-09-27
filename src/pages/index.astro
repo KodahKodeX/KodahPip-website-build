@@ -25,11 +25,17 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       </picture>
     </figure>
     <div class="wrap hero-inner" data-depth="5">
-      <p class="eyebrow">Convener · Speaker · Experience designer</p>
+      <p class="eyebrow">Coach · Strategist · Speaker</p>
       <h1><Scramble text="Tune" delay={400} /><br /><em class="gold"><Scramble text="Everything." delay={800} /></em></h1>
-      <p class="lede">
-        Beings, relationships, organizations, cities. Everything is an instrument. I help leaders bring theirs into coherence.
-      </p>
+      <div class="lede manifesto">
+        <p class="listen">:::LISTEN:::</p>
+        <p class="strong">
+          We can hear the FUTURE approaching. <br />It's up to each of us to <em class="gold">TUNE</em> our contribution <br />to the
+          optimal future together.
+        </p>
+        <p>I <em class="gold">ATTUNE</em> to beings, relationships, organizations, and cities to Land the Future NOW.</p>
+        <p>How in tune is the MUSIC?</p>
+      </div>
       <div class="actions">
         <a class="btn" href="#contact">Book Kodah</a>
         <a class="btn quiet" href="#thesis">The thesis</a>
@@ -44,9 +50,9 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     eyebrow="The thesis"
     lines={[
       { text: 'Everything is', accent: 'an instrument.', sub: 'A being. A team. A family. A company. A city. Each can drift out of tune. Each can be brought back.' },
-      { text: 'Tune', accent: 'the self.', sub: 'Coherence starts in the being. Lose contact with it, and every signal you send and receive gets distorted.' },
+      { text: 'Tune', accent: 'the self.', sub: 'Coherence starts in the being. Lose contact with it, and every signal you send and receive is distorted.' },
       { text: 'Tune', accent: 'relationships.', sub: 'Families and teams are ensembles. Each voice stays distinct. The goal is resonance, not sameness.' },
-      { text: 'Tune', accent: 'contribution.', sub: 'In tune, you find the rooms, the work and the places your gifts were made for.' },
+      { text: 'Tune', accent: 'contribution.', sub: 'In tune, you notice the rooms, the work, and the places where you are the gift.' },
       { text: 'Tune', accent: 'everything.' },
     ]}
   />
@@ -56,12 +62,9 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       <div class="origin reveal">
         <p class="eyebrow">Why this work</p>
         <p>
-          I learned this as a founder. HostHome, Suyana Technologies, Permanence Capital, Urth Capital, CampUS Holdings Group, and
-          now KyberKapital and the Resilience Fund. Building them, I kept meeting people in the wrong rooms: the wrong community,
-          the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals that sort a life
-          got scrambled too.
+          I learned this founding and leading ventures—HostHome, Suyana Technologies, Permanence Capital, Urth Capital, CampUS Holdings Group, and now KyberKapital and the Resilience Fund—building each revealed keys to the journey. I kept meeting people in the wrong rooms: the wrong community, the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals that sort life scrambled for me as well.
         </p>
-        <p>Tuning is how I found my way back. It is also how I help leaders, teams and cultures find theirs.</p>
+        <p>Tuning is how I found my way back. It is also how I help leaders, teams, and cultures do the same.</p>
       </div>
     </div>
   </section>
@@ -70,7 +73,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <section class="served">
     <div class="wrap served-grid">
       <div class="reveal">
-        <p class="eyebrow">Teams I've served</p>
+        <p class="eyebrow">Teams I have served</p>
         <h2>A decade in <em class="gold">the room.</em></h2>
         <p class="served-note">
           The title changed with every engagement. What I brought did not: my being, and the gifts that come with it.
@@ -131,7 +134,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       </div>
       <div class="reveal">
         <p class="big">
-          Intelligence is leaving the screen. It is moving into our clothes, our homes, our vehicles and our bodies.
+          Intelligence is moving beyond the screen. It is entering our clothes, our homes, our vehicles, and our bodies.
         </p>
         <p>
           I have lived that shift from the inside. Frontier medicine rewrote my body and my sense of self, and I came back with a
@@ -141,7 +144,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         <ol class="takeaways">
           <li>Where computing goes after the screen</li>
           <li>What frontier technology does to identity, and the ethical lines that matter</li>
-          <li>How to design products, places and experiences that bring people into coherence</li>
+          <li>How to design products, places, and experiences that bring people into coherence</li>
         </ol>
         <a class="link" href="/speaking/">All topics and formats</a>
       </div>
@@ -155,7 +158,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         <p class="eyebrow">Built on real production</p>
         <h2>Ideas made <em class="gold">inhabitable.</em></h2>
         <p class="lede">
-          I'm a partner in <a class="link" href={site.activ8Url} rel="noopener">ACTIV8</a>, a creative experience agency powered by
+          I am a partner in <a class="link" href={site.activ8Url} rel="noopener">ACTIV8</a>, a creative experience agency powered by
           SJP: twelve years of live production across Los Angeles and Las Vegas.
         </p>
         <div class="services">
@@ -230,8 +233,8 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   .hero {
     --hero-spine: 70%;
     position: relative;
-    height: 100svh;
-    min-height: 660px;
+    min-height: max(100svh, 760px);
+    padding: 120px 0 88px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -282,17 +285,36 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     position: relative;
     z-index: 4;
     will-change: transform;
-    margin-top: -6vh;
   }
   .hero h1 {
-    margin-bottom: 32px;
-    font-size: clamp(64px, 10vw, 150px);
+    margin-bottom: 28px;
+    font-size: clamp(64px, 8.6vw, 128px);
     text-shadow: 0 2px 40px rgba(18, 12, 8, 0.9);
   }
   .hero .lede {
     color: var(--bone);
     opacity: 0.86;
     text-shadow: 0 1px 20px rgba(18, 12, 8, 0.95);
+  }
+  .manifesto {
+    max-width: min(560px, 100%);
+    font-size: clamp(17px, 1.4vw, 20px);
+  }
+  .manifesto p {
+    margin: 0 0 16px;
+  }
+  .manifesto p:last-child {
+    margin-bottom: 0;
+  }
+  .manifesto .listen {
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .manifesto .strong {
+    color: var(--bone);
+    font-weight: 500;
   }
   .actions {
     display: flex;
@@ -351,6 +373,9 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
     .frame img {
       object-position: 50% 12%;
+    }
+    .manifesto br {
+      display: none;
     }
     .frame::after {
       left: -8px;
