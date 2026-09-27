@@ -26,7 +26,6 @@ export const site = {
     'COVID Alliance',
     'Cobalt Tech Ventures',
     'EcoMap Technologies',
-    'BreathPen',
     'Circles of Voices',
   ],
 
