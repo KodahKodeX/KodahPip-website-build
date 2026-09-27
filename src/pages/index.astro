@@ -160,11 +160,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         </p>
       </div>
       <ul class="credits reveal">
-        <li><span>Pop Up Book</span><em>Immersive theatrical installation</em></li>
-        <li><span>“Oh, the Places You’ll Go!”</span><em>Touring walkthrough experience</em></li>
         <li><span>Interblock</span><em>Showroom and G2E experience</em></li>
         <li><span>IPME</span><em>Outdoor video wall booth</em></li>
         <li><span>Google Ads at CES</span><em>Production, through NVE</em></li>
+        <li class="dev"><span>Pop Up Book</span><em>Immersive theatrical installation <b class="tag">In development</b></em></li>
+        <li class="dev"><span>“Oh, the Places You’ll Go!”</span><em>Touring walkthrough experience <b class="tag">In development</b></em></li>
       </ul>
       <p class="fine reveal">Selected work by the ACTIV8 and SJP teams and their production partners.</p>
     </div>
@@ -566,6 +566,21 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     color: var(--sand);
     align-self: center;
   }
+  .credits .dev span {
+    color: var(--sand);
+  }
+  .credits .tag {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 3px 9px;
+    border: 1px solid rgba(207, 155, 92, 0.45);
+    color: var(--gold);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
   .fine {
     font-size: 13px;
     color: var(--sand-dim);
@@ -631,6 +646,10 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   @media (max-width: 560px) {
     .served-list {
       grid-template-columns: 1fr;
+    }
+    .credits .tag {
+      display: table;
+      margin: 10px 0 0;
     }
   }
 </style>
