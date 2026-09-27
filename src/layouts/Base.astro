@@ -11,7 +11,7 @@ const fullTitle = title ? `${title} — ${site.name}` : site.title;
 const path = Astro.url.pathname;
 const nav = [
   { href: '/speaking/', label: 'Speaking' },
-  { href: '/#convenings', label: 'Convenings' },
+  { href: '/#work', label: 'Work' },
   { href: '/writing/', label: 'Writing' },
   { href: '/about/', label: 'About' },
 ];
@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
         <label for="navtoggle" class="burger" aria-label="Menu"><span></span><span></span></label>
         <nav aria-label="Main">
           {nav.map((n) => (
-            <a href={n.href} aria-current={path.startsWith(n.href) && n.href !== '/#convenings' ? 'page' : undefined}>
+            <a href={n.href} aria-current={path.startsWith(n.href) && n.href !== '/#work' ? 'page' : undefined}>
               {n.label}
             </a>
           ))}

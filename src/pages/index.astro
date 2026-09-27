@@ -29,12 +29,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       <h1><Scramble text="Tune" delay={400} /><br /><em class="gold"><Scramble text="Everything." delay={800} /></em></h1>
       <div class="lede manifesto">
         <p class="listen">:::LISTEN:::</p>
-        <p class="strong">
-          We can hear the FUTURE approaching. <br />It's up to each of us to <em class="gold">TUNE</em> our contribution <br />to the
-          optimal future together.
+        <p class="strong">We can hear the <em class="gold">FUTURE</em> approaching.</p>
+        <p>
+          I help <strong>leaders, teams,</strong> and <strong>cities</strong> <em class="gold">TUNE</em> their contributions
+          to our <strong>Optimal Future.</strong>
         </p>
-        <p>I <em class="gold">ATTUNE</em> to beings, relationships, organizations, and cities to Land the Future NOW.</p>
-        <p>How in tune is the MUSIC?</p>
       </div>
       <div class="actions">
         <a class="btn" href="#contact">Book Kodah</a>
@@ -47,7 +46,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <!-- THESIS: words come and go over the wall as you scroll -->
   <ScrollStage
     id="thesis"
-    eyebrow="The thesis"
+    eyebrow="The Thesis"
     lines={[
       { text: 'Everything is', accent: 'an instrument.', sub: 'A being. A team. A family. A company. A city. Each can drift out of tune. Each can be brought back.' },
       { text: 'Tune', accent: 'the self.', sub: 'Coherence starts in the being. Lose contact with it, and every signal you send and receive is distorted.' },
@@ -60,7 +59,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <section class="origin-section">
     <div class="wrap">
       <div class="origin reveal">
-        <p class="eyebrow">Why this work</p>
+        <p class="eyebrow">Why This Work</p>
         <p>
           I learned this founding and leading ventures—HostHome, Suyana Technologies, Permanence Capital, Urth Capital, CampUS Holdings Group, and now KyberKapital and the Resilience Fund—building each revealed keys to the journey. I kept meeting people in the wrong rooms: the wrong community, the wrong work, the wrong home. I knew the feeling. When I lost coherence with my own body, the signals that sort life scrambled.
         </p>
@@ -73,7 +72,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <section class="served">
     <div class="wrap served-grid">
       <div class="reveal">
-        <p class="eyebrow">Teams I have served</p>
+        <p class="eyebrow">Teams I Have Served</p>
         <h2>A decade in <em class="gold">the room.</em></h2>
         <p class="served-note">
           The title changed with every engagement. What I brought did not: my being, and the gifts that come with it.
@@ -88,39 +87,46 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <div class="inlay"></div>
 
   <!-- DOORS -->
-  <section id="convenings" class="doors-section">
+  <section id="work" class="doors-section">
     <div class="wrap">
       <div class="head reveal">
-        <p class="eyebrow">The work</p>
-        <h2>I open rooms.</h2>
+        <p class="eyebrow">The Work</p>
+        <h2>I read people <em class="gold">and markets.</em></h2>
         <p class="lede">
-          I speak to leaders about what technology is doing to us, and what we can do with it. Then I design the gatherings where
-          that conversation changes something.
+          The same perception runs through all of it: sensing what a person, a team, or a market is ready for, and tuning the path to
+          get there. I work only with ventures that add signal, not noise.
         </p>
       </div>
       <div class="doors">
-        <a class="door reveal" href="/speaking/">
-          <p class="eyebrow">01 · Keynotes</p>
-          <h3>Opening addresses and keynotes</h3>
-          <p>On technology, the self and coherence. For conferences, summits and leadership gatherings that want to leave changed.</p>
-          <span class="go">Speaking topics <i>→</i></span>
-        </a>
-        <a class="door reveal featured" href="#contact">
-          <p class="eyebrow">02 · Convenings</p>
-          <h3>Gatherings and company experiences</h3>
+        <a class="door reveal featured" href={site.calendly || '#contact'} rel="noopener">
+          <p class="eyebrow">01 · Coaching</p>
+          <h3>Personal leadership coaching</h3>
           <p>
-            Leadership offsites, culture moments and curated rooms with guest voices from the frontiers of flow and human
-            performance. I design the arc and open the space. ACTIV8 and SJP produce it, so the vision survives contact with the
-            venue.
+            For founders and leaders carrying something bigger than themselves. We tune the being first: body, attention,
+            relationships. The decisions get clearer from there.
+          </p>
+          <span class="go">Book a discovery call <i>→</i></span>
+        </a>
+        <a class="door reveal" href="#contact">
+          <p class="eyebrow">02 · Strategy</p>
+          <h3>Market insight for innovators</h3>
+          <p>
+            For founders bringing new technology to market. I read cultural sentiment, consumer behavior, supply chains and
+            regulation to show where an innovation stands, and whether the market is ready for it. Fund readiness and strategic
+            introductions where they fit.
+          </p>
+          <span class="go">Start a conversation <i>→</i></span>
+        </a>
+        <a class="door reveal" href="/speaking/">
+          <p class="eyebrow">03 · Speaking and Convenings</p>
+          <h3>Keynotes and gatherings</h3>
+          <p>
+            Opening addresses, keynotes and leadership gatherings on technology, the self and coherence. ACTIV8 and SJP produce the
+            experience around the talk.
           </p>
           <p class="offer"><strong>Start with Ignition:</strong> a half-day leadership experience, designed and opened by Kodah.</p>
-          <span class="go">Plan a gathering <i>→</i></span>
+          <span class="go">Speaking topics <i>→</i></span>
         </a>
-        <div class="door reveal quiet-door">
-          <p class="eyebrow">03 · Place</p>
-          <h3>Resilient, design-led places</h3>
-          <p>Homes and gathering places for founders and cultural conveners, built for the conditions ahead. By introduction.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -129,7 +135,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <section class="talk">
     <div class="wrap talk-grid">
       <div class="reveal">
-        <p class="eyebrow">Signature keynote</p>
+        <p class="eyebrow">Signature Keynote</p>
         <h2>Technology<br />you can <em class="gold">feel.</em></h2>
       </div>
       <div class="reveal">
@@ -155,7 +161,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   <section class="proof">
     <div class="wrap">
       <div class="head reveal">
-        <p class="eyebrow">Built on real production</p>
+        <p class="eyebrow">Built on Real Production</p>
         <h2>Ideas made <em class="gold">inhabitable.</em></h2>
         <p class="lede">
           I am a partner in <a class="link" href={site.activ8Url} rel="noopener">ACTIV8</a>, a creative experience agency powered by
@@ -315,6 +321,10 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   .manifesto .strong {
     color: var(--bone);
     font-weight: 500;
+  }
+  .manifesto strong {
+    color: var(--bone);
+    font-weight: 600;
   }
   .actions {
     display: flex;
@@ -486,7 +496,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
 
   .doors {
     display: grid;
-    grid-template-columns: 1fr 1.25fr 1fr;
+    grid-template-columns: 1.25fr 1fr 1fr;
     gap: 20px;
   }
   .door {
