@@ -159,10 +159,17 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
           SJP: twelve years of live production across Los Angeles and Las Vegas.
         </p>
         <div class="services">
+          <figure class="ubu">
+            <img src="/img/camp-ubu.webp" alt="Camp UBU's art car on the playa at Burning Man, crowded with campers, with a Trust the Process sign" width="1199" height="1100" loading="lazy" />
+            <figcaption>Camp UBU, Burning Man. The art car, with artwork by Olivia Steele.</figcaption>
+          </figure>
           <div>
             <p class="eyebrow">Through ACTIV8</p>
             <h3>Burning Man camp design and production</h3>
-            <p>Concept, infrastructure and build for large theme camps: commercial power, kitchens and common spaces, delivered on the playa.</p>
+            <p>
+              Full AV production at the core: sound systems, lighting, power and stages. Plus the build around them, from kitchens to
+              common spaces, delivered on the playa.
+            </p>
           </div>
           <div>
             <p class="eyebrow">Through ACTIV8</p>
@@ -558,9 +565,32 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
 
   .services {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: 20px;
     margin-top: 40px;
+  }
+  .ubu {
+    grid-row: span 2;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    background: var(--graphite);
+    padding: 8px;
+  }
+  .ubu img {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 70%;
+    display: block;
+  }
+  .ubu figcaption {
+    font-size: 13px;
+    color: var(--sand-dim);
+    padding: 12px 4px 4px;
   }
   .services > div {
     padding: 32px 30px;
@@ -673,6 +703,12 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
     .origin {
       margin-left: 0;
+    }
+    .ubu {
+      grid-row: auto;
+    }
+    .ubu img {
+      aspect-ratio: 1 / 1;
     }
   }
   @media (max-width: 560px) {
