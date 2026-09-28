@@ -2,7 +2,7 @@
 // The site is fully static: Astro builds into dist/, and Cloudflare serves those files.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "kodahpip",
+  "name": "kodahpip-website-build",
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": "./dist",
