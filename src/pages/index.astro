@@ -132,8 +132,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   </section>
 
   <!-- SIGNATURE TALK -->
-  <section class="talk">
-    <div class="wrap talk-grid">
+  <section class="talk" data-talk>
+    <div class="talk-bg" aria-hidden="true">
+      <img src="/img/tech-you-can-feel.webp" alt="" loading="lazy" decoding="async" />
+    </div>
+    <div class="wrap talk-copy">
       <div class="reveal">
         <p class="eyebrow">Signature Keynote</p>
         <h2>Technology<br />you can <em class="gold">feel.</em></h2>
@@ -558,10 +561,45 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     background: transparent;
   }
 
-  .talk-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 7vw, 110px);
+  .talk {
+    position: relative;
+    overflow: hidden;
+  }
+  .talk-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+  }
+  .talk-bg img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 560px;
+    object-fit: cover;
+    object-position: 68% 30%;
+    opacity: 0;
+    transform: scale(1.08);
+    will-change: opacity, transform;
+  }
+  .talk-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(18, 12, 8, 0.95) 0%, rgba(18, 12, 8, 0.86) 36%, rgba(18, 12, 8, 0.3) 60%, rgba(18, 12, 8, 0.08) 100%),
+      linear-gradient(to bottom, var(--obsidian) 0%, transparent 18%, transparent 62%, var(--obsidian) 100%);
+  }
+  .talk-copy {
+    position: relative;
+    z-index: 1;
+  }
+  .talk-copy > div {
+    max-width: 540px;
+  }
+  .talk-copy h2 {
+    margin-bottom: 40px;
   }
   .talk .big {
     font-family: var(--serif);
@@ -726,7 +764,6 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     .served-grid,
     .services,
     .doors,
-    .talk-grid,
     .essays {
       grid-template-columns: 1fr;
     }
@@ -738,6 +775,22 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
     .origin {
       margin-left: 0;
+    }
+    .talk {
+      padding-top: 0;
+    }
+    .talk-bg {
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .talk-bg img {
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 5 / 4;
+      object-position: 70% 35%;
+    }
+    .talk-bg::after {
+      background: linear-gradient(to bottom, var(--obsidian) 0%, transparent 18%, transparent 70%, var(--obsidian) 100%);
     }
     .ubu {
       grid-row: auto;
@@ -758,6 +811,21 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
 </style>
 
 <script>
+  // Technology You Can Feel: the photo fades up and settles as the section scrolls in.
+  const talk = document.querySelector<HTMLElement>('[data-talk]');
+  const talkImg = talk?.querySelector<HTMLElement>('.talk-bg img');
+  if (talk && talkImg) {
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const paint = () => {
+      const r = talk.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / (window.innerHeight * 0.75)));
+      talkImg.style.opacity = String(still ? 1 : p);
+      talkImg.style.transform = still ? 'none' : `scale(${(1.08 - 0.08 * p).toFixed(3)})`;
+    };
+    window.addEventListener('scroll', () => requestAnimationFrame(paint), { passive: true });
+    window.addEventListener('resize', paint);
+    paint();
+  }
   // Depth: the portrait and the words drift in opposite directions as the mouse moves.
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   const canHover = window.matchMedia('(hover: hover)').matches;
