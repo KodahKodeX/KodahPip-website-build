@@ -1,0 +1,15 @@
+// Cloudflare hosting config for kodahpip.com.
+// The site is fully static: Astro builds into dist/, and Cloudflare serves those files.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kodahpip",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /about serves about/index.html, and /about/ stays the canonical URL
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Custom domains are added in the Cloudflare dashboard at cutover (see README).
+  "workers_dev": true
+}

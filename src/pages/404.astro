@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not found" description="This page isn't here.">
+  <section class="lost">
+    <div class="wrap narrow">
+      <p class="eyebrow">404</p>
+      <h1>This page is <em class="gold">out of tune.</em></h1>
+      <p>The link may be old, or the page may have moved.</p>
+      <p class="actions">
+        <a class="btn" href="/">Home</a>
+        <a class="btn quiet" href="/writing/">Writing</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lost {
+    padding: clamp(96px, 18vh, 200px) 0;
+  }
+  .lost p {
+    margin-top: 16px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+</style>
