@@ -17,3 +17,9 @@ design aesthetic inputs/
 /*.mp4
 /*.mov
 .wrangler/
+
+# Private source material kept in the project folder
+/*.pdf
+/*.pptx
+/*.key
+/Site Images/
