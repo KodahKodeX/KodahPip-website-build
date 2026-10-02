@@ -19,6 +19,8 @@ export const site = {
   newsletterUrl: 'https://kodahpip.substack.com/subscribe',
 
   activ8Url: 'https://www.sjp.vegas/',
+  // Cobalt X website. Leave empty to show the name without a link.
+  cobaltxUrl: '',
   // Teams I've served (homepage). Add, remove or reorder names here.
   served: [
     'Summit Series',

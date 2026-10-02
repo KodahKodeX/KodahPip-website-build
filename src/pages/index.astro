@@ -190,6 +190,32 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
           </div>
         </div>
       </div>
+      <div class="gallery reveal">
+        <figure class="g-feature">
+          <img src="/img/a8-edpa-ipme.webp" alt="IPME container activation at night under string lights, EDPA Access 2024" width="1600" height="1000" loading="lazy" />
+          <figcaption>EDPA Access 2024 · Indian Wells</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/a8-essence.webp" alt="Arena stage and LED screens at the Essence Festival of Culture" width="1000" height="750" loading="lazy" />
+          <figcaption>Essence Festival of Culture</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/a8-raise-the-bar.webp" alt="Conference stage, screens and lighting for Diageo's Raise the Bar" width="1000" height="750" loading="lazy" />
+          <figcaption>Diageo · Raise the Bar</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/a8-interblock.webp" alt="Interblock LED show-floor environment at G2E" width="1000" height="750" loading="lazy" />
+          <figcaption>Interblock · G2E 2023</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/a8-mario-premiere.webp" alt="Arrival and media-line setup at The Super Mario Bros. Movie premiere" width="1000" height="750" loading="lazy" />
+          <figcaption>The Super Mario Bros. Movie premiere</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/a8-glaad.webp" alt="GLAAD Media Awards bar and event lighting" width="1000" height="750" loading="lazy" />
+          <figcaption>GLAAD Media Awards</figcaption>
+        </figure>
+      </div>
       <ul class="credits reveal">
         <li><span>Camp UBU, Burning Man</span><em>65-person camp with full commercial power, kitchen and common-area infrastructure</em></li>
         <li><span>Interblock</span><em>Showroom and G2E experience</em></li>
@@ -198,7 +224,62 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         <li class="dev"><span>Pop Up Book</span><em>Immersive theatrical installation <b class="tag">In development</b></em></li>
         <li class="dev"><span>“Oh, the Places You’ll Go!”</span><em>Touring walkthrough experience <b class="tag">In development</b></em></li>
       </ul>
-      <p class="fine reveal">Selected work by the ACTIV8 and SJP teams and their production partners.</p>
+      <p class="fine reveal">
+        Selected production experience from the SJP archive, by the ACTIV8 and SJP teams and their production partners. Inclusion
+        does not imply sole creative authorship or ownership of client brands.
+      </p>
+    </div>
+  </section>
+
+  <!-- VENTURES -->
+  <section class="ventures" id="ventures">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Kyber Kapital</p>
+        <h2>Place, Movement, <em class="gold">and Signal.</em></h2>
+        <p class="lede">How humans interface with the frontier.</p>
+      </div>
+      <p class="v-intro reveal">
+        Every wave of technology eventually meets the human body: where we live, how we move, and what we sense. That is where
+        adoption is decided, and where we believe the lasting companies of the next decade will be built. Kyber Kapital is organized
+        around that meeting point.
+      </p>
+      <div class="panels reveal">
+        <article>
+          <span class="num">01</span>
+          <h3>Place</h3>
+          <p>
+            Homes and gathering places built for the conditions ahead: climate-durable materials, distributed energy, and buildings
+            that stay livable, insurable and desirable.
+          </p>
+        </article>
+        <article>
+          <span class="num">02</span>
+          <h3>Movement</h3>
+          <p>
+            How people move through the world, in body and in vehicle. Mobility, embodiment, and the tools that keep people capable,
+            healthy and free to roam.
+          </p>
+        </article>
+        <article>
+          <span class="num">03</span>
+          <h3>Signal</h3>
+          <p>
+            The interfaces that carry intelligence off the screen: wearables, spatial audio and sensing. Technology people can feel,
+            and choose to live with.
+          </p>
+        </article>
+      </div>
+      <p class="fine reveal">
+        Kyber Kapital is in formation. This is a point of view, not an offer to sell or a solicitation to buy any security.
+      </p>
+
+      <div class="advisor reveal">
+        <p class="eyebrow">
+          Strategic Advisor: {site.cobaltxUrl ? <a href={site.cobaltxUrl} rel="noopener">Cobalt X</a> : 'Cobalt X'}
+        </p>
+        <p class="adv-tag">Hedging the <em class="gold">frontier.</em></p>
+      </div>
     </div>
   </section>
 
@@ -677,6 +758,77 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     color: var(--sand);
     margin: 0;
   }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 0 0 56px;
+  }
+  .gallery figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background: var(--graphite);
+    aspect-ratio: 4 / 3;
+  }
+  .gallery .g-feature {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+  .gallery img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .gallery figure:hover img {
+    transform: scale(1.03);
+  }
+  .gallery figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 28px 14px 12px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--bone);
+    background: linear-gradient(to top, rgba(12, 8, 5, 0.85), transparent);
+  }
+  .v-intro {
+    max-width: 62ch;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.45;
+    color: var(--bone);
+    margin: 0 0 clamp(48px, 6vw, 72px);
+  }
+  .advisor {
+    margin-top: clamp(64px, 8vw, 104px);
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .advisor .eyebrow {
+    margin: 0;
+  }
+  .advisor .eyebrow a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .adv-tag {
+    font-family: var(--serif);
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.1;
+    margin: 0;
+  }
   .credits {
     list-style: none;
     padding: 0;
@@ -800,6 +952,15 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
   }
   @media (max-width: 560px) {
+    .gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+    .gallery .g-feature,
+    .gallery figure:last-child {
+      grid-column: span 2;
+      grid-row: auto;
+      aspect-ratio: 16 / 10;
+    }
     .served-list {
       grid-template-columns: 1fr;
     }
