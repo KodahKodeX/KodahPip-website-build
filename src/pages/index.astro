@@ -240,36 +240,37 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         <p class="lede">How humans interface with the frontier.</p>
       </div>
       <p class="v-intro reveal">
-        Every wave of technology eventually meets the human body: where we live, how we move, and what we sense. That is where
-        adoption is decided, and where we believe the lasting companies of the next decade will be built. Kyber Kapital is organized
-        around that meeting point.
+        Placemaking, transportation and communication are being reinvented at the same time, through AI, robotics and the end of
+        the smartphone era. Kyber Kapital is built around the places, vehicles and devices of what comes next.
       </p>
       <div class="panels reveal">
         <article>
           <span class="num">01</span>
           <h3>Place</h3>
-          <p>
-            Homes and gathering places built for the conditions ahead: climate-durable materials, distributed energy, and buildings
-            that stay livable, insurable and desirable.
-          </p>
+          <p class="layer">The physical layer</p>
+          <p>Adaptive reuse, experiential hospitality, thematic co-working, cultural institutions, eVTOL infrastructure.</p>
         </article>
         <article>
           <span class="num">02</span>
           <h3>Movement</h3>
-          <p>
-            How people move through the world, in body and in vehicle. Mobility, embodiment, and the tools that keep people capable,
-            healthy and free to roam.
-          </p>
+          <p class="layer">The mobility layer</p>
+          <p>Autonomous vehicles, eVTOLs, AI fleet orchestration, human-centric mobility systems.</p>
         </article>
         <article>
           <span class="num">03</span>
           <h3>Signal</h3>
-          <p>
-            The interfaces that carry intelligence off the screen: wearables, spatial audio and sensing. Technology people can feel,
-            and choose to live with.
-          </p>
+          <p class="layer">The interface layer</p>
+          <p>Post-screen interfaces, ambient compute, wearable AI, empathic communication.</p>
         </article>
       </div>
+      <blockquote class="principle reveal">
+        <p class="eyebrow">Guiding principle</p>
+        <p>Nervous-system coherence as <em class="gold">infrastructure.</em></p>
+        <p class="principle-sub">
+          Technology that makes people calmer, clearer and more capable compounds differently than technology that extracts
+          attention.
+        </p>
+      </blockquote>
       <p class="fine reveal">
         Kyber Kapital is in formation. This is a point of view, not an offer to sell or a solicitation to buy any security.
       </p>
@@ -804,6 +805,33 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     line-height: 1.45;
     color: var(--bone);
     margin: 0 0 clamp(48px, 6vw, 72px);
+  }
+  .panels .layer {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: -6px 0 14px;
+  }
+  .principle {
+    margin: clamp(56px, 7vw, 88px) 0 0;
+    padding: 0 0 0 28px;
+    border-left: 2px solid var(--gold);
+    max-width: 760px;
+  }
+  .principle p:not(.eyebrow) {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.2;
+    margin: 0;
+    color: var(--bone);
+  }
+  .principle p.principle-sub {
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6;
+    color: var(--sand);
+    margin-top: 16px;
   }
   .advisor {
     margin-top: clamp(64px, 8vw, 104px);
