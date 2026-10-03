@@ -52,7 +52,18 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       { text: 'Tune', accent: 'the self.', sub: 'Coherence starts in the being. Lose contact with it, and every signal you send and receive is distorted.' },
       { text: 'Tune', accent: 'relationships.', sub: 'Families and teams are ensembles. Each voice stays distinct. The goal is resonance, not sameness.' },
       { text: 'Tune', accent: 'contribution.', sub: 'In tune, you notice the rooms, the work, and the places where you are the gift.', bg: '/img/future-coast.webp', bgPos: '42% 50%' },
-      { text: 'Tune', accent: 'everything.', bg: '/img/future-city.webp', bgPos: '24% 60%' },
+      {
+        text: 'Tune',
+        accent: 'everything.',
+        bg: '/img/pacific-civic-horizon-1672.webp',
+        bgSrcset: '/img/pacific-civic-horizon-960.webp 960w, /img/pacific-civic-horizon-1672.webp 1672w',
+        bgAvif: '/img/pacific-civic-horizon-960.avif 960w, /img/pacific-civic-horizon-1672.avif 1672w',
+        bgSize: [1672, 941],
+        bgPos: '56% 42%',
+        bgPosM: '44% 50%',
+        cool: true,
+        upper: true,
+      },
     ]}
   />
 
@@ -172,7 +183,34 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
         Placemaking, transportation and communication are being reinvented at the same time, through AI, robotics and the end of
         the smartphone era. Kyber Kapital is built around the places, vehicles and devices of what comes next.
       </p>
-      <div class="panels reveal">
+    </div>
+
+    <figure class="commons" data-commons>
+      <picture>
+        <source
+          type="image/avif"
+          srcset="/img/kyber-commons-960.avif 960w, /img/kyber-commons-1672.avif 1672w"
+          sizes="(max-width: 1600px) 100vw, 1600px"
+        />
+        <source
+          type="image/webp"
+          srcset="/img/kyber-commons-960.webp 960w, /img/kyber-commons-1672.webp 1672w"
+          sizes="(max-width: 1600px) 100vw, 1600px"
+        />
+        <img
+          src="/img/kyber-commons-1672.webp"
+          alt="A waterside courtyard at golden hour: a woman in clear AR glasses sits with coffee in the foreground, families cross reflecting pools, and an autonomous car waits beneath a sculpted mobility canopy, with terraced hospitality buildings and a distant city skyline."
+          width="1672"
+          height="941"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+      <figcaption class="wrap">The Kyber Commons. Concept study.</figcaption>
+    </figure>
+
+    <div class="wrap">
+      <div class="panels datum reveal">
         <article>
           <span class="num">01</span>
           <h3>Place</h3>
@@ -510,6 +548,70 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     flex-wrap: wrap;
   }
 
+  /* The Kyber Commons: a wide architectural plate, wider than the text column */
+  .ventures {
+    overflow-x: clip;
+  }
+  .commons {
+    --plate: min(1600px, 100vw);
+    width: var(--plate);
+    margin: 0 0 0 calc(50% - var(--plate) / 2);
+    position: relative;
+  }
+  .commons picture {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 1672 / 941;
+    background: var(--charcoal);
+  }
+  .commons img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 55%;
+  }
+  /* revealed once, slowly, as the plate comes into view (scripted; visible without JS) */
+  .commons.pending img {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  .commons.shown img {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 1.6s ease,
+      transform 2.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .commons figcaption {
+    padding-top: 14px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--concrete);
+    opacity: 0.72;
+  }
+  /* pillars hang from one bronze datum line, like levels on an architectural section */
+  .panels.datum {
+    margin-top: clamp(56px, 7vw, 96px);
+    border-top: 1px solid rgba(207, 155, 92, 0.55);
+  }
+  .panels.datum article {
+    position: relative;
+    border-right: 0;
+    padding-top: 44px;
+  }
+  .panels.datum article::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 1px;
+    height: 28px;
+    background: var(--gold);
+  }
+  .panels.datum article + article::before {
+    left: 36px;
+  }
   .panels {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -590,13 +692,21 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     display: flex;
     flex-direction: column;
     padding: 40px 32px;
-    background: var(--graphite);
-    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1d1611 0%, #18120e 100%);
+    border: 0;
+    box-shadow:
+      inset 0 0 0 1px rgba(207, 155, 92, 0.1),
+      inset 0 1px 0 rgba(239, 231, 218, 0.05),
+      inset 0 -40px 60px rgba(0, 0, 0, 0.22);
     text-decoration: none;
     transition: border-color 0.3s, transform 0.3s;
   }
-  a.door:hover {
-    border-color: var(--gold);
+  a.door:hover,
+  a.door:focus-visible {
+    box-shadow:
+      inset 0 0 0 1px rgba(226, 168, 95, 0.7),
+      inset 0 1px 0 rgba(239, 231, 218, 0.06),
+      inset 0 -40px 60px rgba(0, 0, 0, 0.22);
   }
   .door::before {
     content: '';
@@ -621,7 +731,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     padding-top: 16px;
   }
   .door.featured {
-    background: var(--graphite-2);
+    background: linear-gradient(180deg, #2a1f18 0%, #211812 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(207, 155, 92, 0.28),
+      inset 0 1px 0 rgba(239, 231, 218, 0.06),
+      inset 0 -40px 60px rgba(0, 0, 0, 0.22);
   }
   .go {
     margin-top: auto;
@@ -662,7 +776,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     object-fit: cover;
     object-position: 68% 30%;
     opacity: 0;
-    transform: scale(1.08);
+    transform: scale(1.05);
     will-change: opacity, transform;
   }
   .talk-bg::after {
@@ -729,8 +843,8 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     margin: 0;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--line);
-    background: var(--graphite);
+    background: #18120e;
+    box-shadow: inset 0 0 0 1px rgba(207, 155, 92, 0.1);
     padding: 8px;
   }
   .ubu img {
@@ -749,8 +863,11 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
   }
   .services > div {
     padding: 32px 30px;
-    background: var(--graphite);
-    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1d1611 0%, #18120e 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(207, 155, 92, 0.1),
+      inset 0 1px 0 rgba(239, 231, 218, 0.05),
+      inset 0 -40px 60px rgba(0, 0, 0, 0.22);
   }
   .services h3 {
     margin: 14px 0 12px;
@@ -956,6 +1073,22 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     .origin {
       margin-left: 0;
     }
+    .commons picture {
+      aspect-ratio: 4 / 3;
+    }
+    .commons img {
+      object-position: 30% 60%;
+    }
+    .panels.datum article,
+    .panels.datum article + article {
+      padding-left: 20px;
+    }
+    .panels.datum article::before,
+    .panels.datum article + article::before {
+      left: 0;
+      top: 32px;
+      height: calc(100% - 64px);
+    }
     .talk {
       padding-top: 0;
     }
@@ -980,6 +1113,12 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
     }
   }
   @media (max-width: 560px) {
+    .commons picture {
+      aspect-ratio: 1 / 1;
+    }
+    .commons img {
+      object-position: 17% 62%;
+    }
     .gallery {
       grid-template-columns: 1fr 1fr;
     }
@@ -1000,6 +1139,25 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
 </style>
 
 <script>
+  // The Kyber Commons: one slow reveal when the plate first enters view.
+  const commons = document.querySelector<HTMLElement>('[data-commons]');
+  if (commons && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const r = commons.getBoundingClientRect();
+    if (r.top > window.innerHeight) {
+      commons.classList.add('pending');
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            commons.classList.add('shown');
+            commons.classList.remove('pending');
+            io.disconnect();
+          }
+        },
+        { threshold: 0.2 }
+      );
+      io.observe(commons);
+    }
+  }
   // Technology You Can Feel: the photo fades up and settles as the section scrolls in.
   const talk = document.querySelector<HTMLElement>('[data-talk]');
   const talkImg = talk?.querySelector<HTMLElement>('.talk-bg img');
@@ -1009,7 +1167,7 @@ const essays = Object.values(import.meta.glob('./writing/*.md', { eager: true })
       const r = talk.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / (window.innerHeight * 0.75)));
       talkImg.style.opacity = String(still ? 1 : p);
-      talkImg.style.transform = still ? 'none' : `scale(${(1.08 - 0.08 * p).toFixed(3)})`;
+      talkImg.style.transform = still ? 'none' : `scale(${(1.05 - 0.05 * p).toFixed(3)})`;
     };
     window.addEventListener('scroll', () => requestAnimationFrame(paint), { passive: true });
     window.addEventListener('resize', paint);

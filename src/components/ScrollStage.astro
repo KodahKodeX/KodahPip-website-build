@@ -8,7 +8,13 @@ interface Line {
   accent?: string; // part of the line shown in brass italics
   sub?: string;
   bg?: string; // optional background image that fades in behind this line
-  bgPos?: string; // which part of the image to keep in view on narrow screens
+  bgPos?: string; // focal point on wide screens (object-position)
+  bgPosM?: string; // focal point on phones; falls back to bgPos
+  bgSrcset?: string; // responsive WebP sources for bg
+  bgAvif?: string; // responsive AVIF sources for bg
+  bgSize?: [number, number]; // intrinsic size, to reserve space
+  cool?: boolean; // daylight image: keep the sky luminous, lighten the veil
+  upper?: boolean; // set the words in the upper part of the frame (open sky)
 }
 interface Props {
   lines: Line[];
@@ -22,13 +28,34 @@ const { lines, id, eyebrow } = Astro.props;
   <div class="pin">
     <WoodWall spine="50%" shade={0.42} flow={0.35} />
     <div class="bgs" aria-hidden="true">
-      {lines.map((l, i) => l.bg && <img class="bg" data-i={i} src={l.bg} alt="" loading="lazy" decoding="async" style={`object-position:${l.bgPos || '50% 50%'}`} />)}
+      {lines.map((l, i) =>
+        l.bg && (
+          <picture>
+            {l.bgAvif && <source type="image/avif" srcset={l.bgAvif} sizes="100vw" />}
+            {l.bgSrcset && <source type="image/webp" srcset={l.bgSrcset} sizes="100vw" />}
+            <img
+              class:list={['bg', { cool: l.cool }]}
+              data-i={i}
+              data-cool={l.cool ? '1' : undefined}
+              src={l.bg}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              width={l.bgSize?.[0]}
+              height={l.bgSize?.[1]}
+              style={`--pos:${l.bgPos || '50% 50%'};--pos-m:${l.bgPosM || l.bgPos || '50% 50%'}`}
+            />
+          </picture>
+        )
+      )}
     </div>
     <div class="veil"></div>
+    <div class="sky"></div>
+    <div class="fade"></div>
     {eyebrow && <p class="eyebrow stage-eyebrow">{eyebrow}</p>}
     <div class="words">
       {lines.map((l, i) => (
-        <div class="line" data-i={i}>
+        <div class:list={['line', { upper: l.upper }]} data-i={i}>
           <p class="big">
             {l.text}
             {l.accent && <> <em class="gold">{l.accent}</em></>}
@@ -70,17 +97,49 @@ const { lines, id, eyebrow } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: var(--pos);
     opacity: 0;
     filter: saturate(0.92) brightness(0.82);
     will-change: opacity, transform;
+  }
+  /* daylight imagery keeps its own light: no warm grade, only a touch of depth */
+  .bg.cool {
+    filter: saturate(1) brightness(0.94);
+  }
+  @media (max-width: 760px) {
+    .bg {
+      object-position: var(--pos-m);
+    }
   }
   .veil {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background:
-      radial-gradient(ellipse 55% 45% at 50% 50%, rgba(18, 12, 8, 0.82) 0%, rgba(18, 12, 8, 0.35) 70%, transparent 100%),
-      linear-gradient(to bottom, var(--obsidian) 0%, transparent 18%, transparent 82%, var(--obsidian) 100%);
+    background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(18, 12, 8, 0.82) 0%, rgba(18, 12, 8, 0.35) 70%, transparent 100%);
+    /* lifts away as a daylight image arrives (set from the script) */
+    opacity: calc(1 - var(--cool, 0) * 0.85);
+  }
+  /* graduated sky filter for daylight imagery: deepens the upper sky evenly, keeps its blue */
+  .sky {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--cool, 0);
+    background: linear-gradient(
+      to bottom,
+      rgba(12, 15, 20, 0.62) 0%,
+      rgba(12, 15, 20, 0.5) 24%,
+      rgba(12, 15, 20, 0.22) 42%,
+      transparent 58%
+    );
+  }
+  .fade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, var(--obsidian) 0%, transparent 16%, transparent 84%, var(--obsidian) 100%);
   }
   .stage-eyebrow {
     position: absolute;
@@ -100,9 +159,27 @@ const { lines, id, eyebrow } = Astro.props;
   }
   .line {
     grid-area: 1 / 1;
+    align-self: center;
     text-align: center;
     opacity: 0;
     will-change: opacity, transform, filter;
+  }
+  /* sits in the open sky above the horizon */
+  .line.upper {
+    position: relative;
+    padding-bottom: 34vh;
+  }
+  /* over daylight, brass reads as pale bronze so it holds against a bright sky */
+  .line.upper .big em {
+    color: #e6c495;
+  }
+  /* a shade that follows the letterforms, so the sky stays open around them */
+  .line.upper .big {
+    text-shadow:
+      0 0 14px rgba(10, 12, 16, 0.85),
+      0 0 34px rgba(10, 12, 16, 0.75),
+      0 0 70px rgba(10, 12, 16, 0.55),
+      0 1px 2px rgba(10, 12, 16, 0.85);
   }
   .big {
     font-family: var(--serif);
@@ -168,14 +245,18 @@ const { lines, id, eyebrow } = Astro.props;
       });
       const active = Math.max(0, Math.min(n - 1, Math.round(pos)));
       // backgrounds crossfade with their lines; the last one stays once it arrives
+      let cool = 0;
       bgs.forEach((img) => {
         const i = Number(img.dataset.i);
         const d = pos - i;
         let o = reduce ? (active === i ? 1 : 0) : Math.min(1, Math.max(0, (1 - Math.abs(d)) * 1.5));
         if (i === n - 1 && d > 0) o = 1;
         img.style.opacity = String(o);
-        if (!reduce) img.style.transform = `scale(${(1.08 - 0.08 * Math.min(1, Math.max(0, d + 1) / 2)).toFixed(3)})`;
+        if (img.dataset.cool) cool = Math.max(cool, o);
+        // a slow settle: at most 5% scale drift
+        if (!reduce) img.style.transform = `scale(${(1.05 - 0.05 * Math.min(1, Math.max(0, d + 1) / 2)).toFixed(3)})`;
       });
+      stage.style.setProperty('--cool', cool.toFixed(3));
       ticks.forEach((t, i) => t.classList.toggle('on', i <= active));
     };
     window.addEventListener('scroll', () => requestAnimationFrame(render), { passive: true });
